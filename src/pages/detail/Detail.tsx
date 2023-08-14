@@ -19,6 +19,7 @@ import Comments from '../../components/comments/comment/commentbody/Comments';
 import * as S from './Styled.Detail';
 import Share from '../../components/common/Share';
 import { AlertFilled, DeleteFilled, EditFilled, LikeFilled } from '@ant-design/icons';
+
 // import Chat from '../components/chat/Chat';
 
 const Detail = () => {
@@ -116,7 +117,10 @@ const Detail = () => {
       alert('로그인 후 사용 가능합니다.');
       return;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 766305aa0a5bff21f57deaa5375577eccfef8b74
     setPaymentModalVisible(true);
   };
 
@@ -169,9 +173,6 @@ const Detail = () => {
                   <S.FeatBtn onClick={handleDelete}>
                     <DeleteFilled />
                   </S.FeatBtn>
-
-                  {/* <button onClick={toggleChat}>채팅하기</button>
-              {isChatOpen && <Chat postId={post.pid.toString()} />} */}
                 </S.FeatBtns>
               )}
             </S.FeatBtnBox>
@@ -183,7 +184,10 @@ const Detail = () => {
             <S.Category>{post.category}</S.Category>
             <S.Time> ∙ {timeAgo}</S.Time>
           </S.CategoryBox>
-          <S.Body dangerouslySetInnerHTML={{ __html: post.body }} />
+          <S.BodyBox>
+            <S.Body dangerouslySetInnerHTML={{ __html: post.body }} />
+          </S.BodyBox>
+
           <S.Line></S.Line>
           <S.ShareBox>
             <Share />
@@ -215,7 +219,12 @@ const Detail = () => {
             <S.Btn onClick={handleJjim}>
               <LikeFilled /> {jjimData?.length}
             </S.Btn>
-            <S.Btn onClick={openPaymentModal}>결제하기</S.Btn>
+            {post.iscompleted == '판매 완료' ? (
+              <S.Btn>판매 완료</S.Btn>
+            ) : (
+              <S.Btn onClick={openPaymentModal}>결제하기</S.Btn>
+            )}
+
             <S.ModalContainer>
               {paymentModalVisible && (
                 <S.ModalWrapper>

@@ -4,7 +4,6 @@ import { atom, useAtom } from 'jotai';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { checkEmailDuplication, signUpService } from '../../../services/supabase/auth';
 import * as S from './Styled.SignUp';
-import { supabase } from '../../../services/supabase/supabase';
 
 import type { UserType } from '../../../types/supabase';
 import { PictureOutlined } from '@ant-design/icons';
@@ -37,7 +36,6 @@ const SignUp = ({ setLoginModal, setSignUpmodal }: SignUpType) => {
   const [isEmailCheked, setIsEmailCheked] = useState(false);
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [users, setUsers] = useState<Array<{ email: string; nickname: string }>>([]);
 
   // 회원가입 뮤테이션
   const signUpMutation = useMutation(signUpService, {
@@ -111,7 +109,6 @@ const SignUp = ({ setLoginModal, setSignUpmodal }: SignUpType) => {
     }
   };
 
-  console.log('users', users);
   // 회원가입 모달 닫기
   const closeSignUpModal = () => {
     setSignUpmodal(false);

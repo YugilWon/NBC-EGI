@@ -66,7 +66,6 @@ export const FeatBtns = styled.div``;
 export const FeatBtn = styled.button`
   margin-left: 15px;
   cursor: pointer;
-  /* padding: 3px 15px; */
 
   background-color: transparent;
   border-radius: 5px;
@@ -101,11 +100,15 @@ export const Time = styled.label`
   margin-left: 5px;
   color: #b0b0b0;
 `;
-
+export const BodyBox = styled.div`
+  max-width: 600px;
+`;
 export const Body = styled.div`
   margin-top: 40px;
   white-space: normal;
   height: 180px;
+
+  overflow-y: scroll;
 `;
 
 export const Line = styled.div`

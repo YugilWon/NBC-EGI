@@ -32,7 +32,7 @@ export const Main = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data, error } = await supabase.from('posts').select('*');
+      const { data, error } = await supabase.from('posts').select('*').order('pid', { ascending: false });
 
       if (error) {
         console.error('Error fetching posts:', error);
@@ -73,6 +73,7 @@ export const Main = () => {
         setCurrentPage(1);
 
         setFilteredPosts(filtered);
+        setCurrentPage(1);
       }
     };
 
