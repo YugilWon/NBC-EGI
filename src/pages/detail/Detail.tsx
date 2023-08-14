@@ -32,11 +32,6 @@ const Detail = () => {
   const [post, setPost] = useState<Post | null>(null);
 
   const { data: jjimData } = useQuery(['jjim'], () => fetchJjimCount(id));
-  // const [isChatOpen, setIsChatOpen] = useState(false);
-
-  // const toggleChat = () => {
-  //   setIsChatOpen(!isChatOpen);
-  // };
 
   const toggleJjimMutation = useMutation(toggleJjim, {
     onSuccess: () => {
@@ -117,6 +112,11 @@ const Detail = () => {
   };
 
   const openPaymentModal = () => {
+    if (!jotaiUserData) {
+      alert('로그인 후 사용 가능합니다.');
+      return;
+    }
+
     setPaymentModalVisible(true);
   };
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { atom } from 'jotai';
 
 import * as S from './Styled.Main';
 import * as CONDITION from '../mypage/Styled.UserPosts';
@@ -19,12 +18,11 @@ import { fetchAllJjim } from '../../services/supabase/jjim';
 import Button from '@mui/material/Button';
 import { LikeFilled } from '@ant-design/icons';
 
-export const usersAtom = atom<Array<{ nickname: string; email: string }>>([]);
-
 export const Main = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [searchKeyword] = useAtom(searchKeywordAtom);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: jjimData } = useQuery(['jjim'], fetchAllJjim);
 
@@ -58,6 +56,7 @@ export const Main = () => {
     } else {
       const filteredPosts = posts.filter((post) => post.category === category);
       setFilteredPosts(filteredPosts);
+      setCurrentPage(1);
     }
   };
 
@@ -71,6 +70,8 @@ export const Main = () => {
           (post) =>
             post.title.toLowerCase().includes(keywordLower) || post.location.toLowerCase().includes(keywordLower)
         );
+        setCurrentPage(1);
+
         setFilteredPosts(filtered);
       }
     };
@@ -92,7 +93,7 @@ export const Main = () => {
     const IconComponent = getIconComponet(category.value); // 이 부분에 오타 수정
     return (
       <Button
-        style={{ padding: '20px', fontSize: '18px', border: '2px solid #0a3a8d;' }}
+        style={{ padding: '20px', fontSize: '18px', border: '2px solid #0056b3' }}
         key={category.value}
         value={category.value}
         onClick={() => handleCategoryClick(category.value)}
@@ -108,8 +109,6 @@ export const Main = () => {
 
   const totalCount = filteredPosts.length;
   const totalPages = Math.ceil(totalCount / pagePerObjects);
-
-  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePreviousPage = () => {
     setCurrentPage(currentPage - 1);

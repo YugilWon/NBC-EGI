@@ -49,7 +49,7 @@ const SignUp = ({ setLoginModal, setSignUpmodal }: SignUpType) => {
   const signUpHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const fetchPosts = async () => {
+    const fetchUsers = async () => {
       const { data, error } = await supabase.from('users').select('*');
 
       if (error) {
@@ -63,7 +63,7 @@ const SignUp = ({ setLoginModal, setSignUpmodal }: SignUpType) => {
       }
     };
 
-    fetchPosts();
+    fetchUsers();
 
     try {
       if (!selectedProfileImg) {
@@ -89,6 +89,10 @@ const SignUp = ({ setLoginModal, setSignUpmodal }: SignUpType) => {
       if (users.some((user) => user.email === userData.email)) {
         alert('이미 존재하는 이메일입니다.');
         return;
+      }
+
+      if (selectedProfileImg === null) {
+        alert('사진을 선택 해주세요!');
       }
 
       const userDataWithImage = {
